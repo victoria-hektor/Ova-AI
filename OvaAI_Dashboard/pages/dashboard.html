@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>
+    OvaAI - Empowering Women's Health Through AI
+  </title>
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+  <style>
+    .main-content {
+      margin-left: 270px;
+      padding: 20px;
+    }
+
+    .pcos-tool-card {
+      max-width: 100%;
+      margin-left: 0;
+    }
+
+    .patient-info-card {
+      max-width: 100%;
+      margin-left: 0;
+      margin-top: 20px; /* Add margin to separate from the previous card */
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand img {
+      max-height: 40px;
+      margin-right: 10px;
+    }
+
+    .navbar-brand span {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .form-label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .form-control[readonly] {
+      background-color: #e9ecef;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href="#">
+        <img src="..\assets\img\logos\logo-no-background.png" class="navbar-brand-img" alt="OvaAI logo">
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse w-auto " id="sidenav-collapse-main">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link active" href="#">
+					<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+						<i class="fas fa-home"></i>
+					</div>
+					<span class="nav-link-text ms-1">PCOS Detection Tool</span>
+				</a>
+			</li>
+		</ul>
+    </div>
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <!-- Content -->
+    <div class="container-fluid py-4">
+      <div class="card pcos-tool-card">
+        <div class="card-body p-3">
+          <h5 class="font-weight-bolder">PCOS Detection Tool</h5>
+          <p class="mb-0">Upload your ultrasound image to check for the likelihood of PCOS.</p>
+          <form action="#" method="post" enctype="multipart/form-data">
+            <div class="input-group my-3">
+              <input type="file" class="form-control" id="inputGroupFile02" name="file">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Upload and Analyse</button>
+          </form>
+          <div id="result" class="mt-4">
+            <!-- Display the classification result here -->
+            {% if classification %}
+              <p id="resultText" class="{{ 'negative' if classification == 'Negative' else '' }}">
+                PCOS Prediction: {{ classification }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Patient Information Card -->
+      <div class="card patient-info-card">
+        <div class="card-body p-3">
+          <h5 class="font-weight-bolder">Patient Information - Jane Doe</h5>
+          <div class="row">
+            <!-- Example of the first few fields -->
+            <div class="col-md-4">
+              <label for="patientFileNo" class="form-label">Patient File No.</label>
+              <input type="text" class="form-control" id="patientFileNo" value="1" readonly>
+            </div>
+            <div class="col-md-4">
+              <label for="age" class="form-label">Age (yrs)</label>
+              <input type="text" class="form-control" id="age" value="28" readonly>
+            </div>
+            <div class="col-md-4">
+              <label for="weight" class="form-label">Weight (Kg)</label>
+              <input type="text" class="form-control" id="weight" value="44.6" readonly>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="height" class="form-label">Height (Cm)</label>
+              <input type="text" class="form-control" id="height" value="152" readonly>
+            </div>
+            <div class="col-md-4">
+              <label for="bmi" class="form-label">BMI</label>
+              <input type="text" class="form-control" id="bmi" value="19.3" readonly>
+            </div>
+            <div class="col-md-4">
+              <label for="bloodGroup" class="form-label">Blood Group</label>
+              <input type="text" class="form-control" id="bloodGroup" value="15" readonly>
+            </div>
+          </div>
+          <!-- Add more fields as needed following the same pattern -->
+          <!-- Example with more fields -->
+          <div class="row">
+            <div class="col-md-4">
+              <label for="pulseRate" class="form-label">Pulse rate (bpm)</label>
+              <input type="text" class="form-control" id="pulseRate" value="78" readonly>
+            </div>
+            <div class="col-md-4">
+              <label for="rr" class="form-label">RR (breaths/min)</label>
+              <input type="text" class="form-control" id="rr" value="22" readonly>
+            </div>
+            <div class="col-md-4">
+              <label for="hb" class="form-label">Hb (g/dl)</label>
+              <input type="text" class="form-control" id="hb" value="10.48" readonly>
+            </div>
+          </div>
+          <!-- Continue with other fields in the same manner -->
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+</body>
+
+</html>
